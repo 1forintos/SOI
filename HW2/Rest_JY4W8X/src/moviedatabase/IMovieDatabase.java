@@ -51,12 +51,7 @@ public interface IMovieDatabase {
 		MediaType.APPLICATION_XML,
 		MediaType.APPLICATION_JSON
 	})
-	public String insertMovie(
-		@FormParam("title") String title,
-		@FormParam("year") int year,
-		@FormParam("director") String director,
-		@FormParam("actor") String[] actor
-	);
+	public String insertMovie(Movie movie);
 	
 	@PUT
 	@Path("movies/{id}")

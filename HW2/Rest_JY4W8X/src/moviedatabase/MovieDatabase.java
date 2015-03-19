@@ -5,21 +5,16 @@ import java.util.List;
 public class MovieDatabase implements IMovieDatabase {
 	
 	private static MovieList movieList;
-	
-	@Override
-	public List<Movie> getAllMovies() {
+
+	public MovieDatabase() {
 		if(movieList == null) {
 			movieList = new MovieList();
 		}
-		System.out.println("תתתת");
-		Movie m1 = new Movie();
-		String[] actors = {"actor1", "actor2", "actor3"};
-		m1.setActors(actors);
-		m1.setDirector("some director" + movieList.getMovies().size());
-		m1.setTitle("Title_" + movieList.getMovies().size());
-		m1.setYear(2015);
-		this.movieList.addMovie(m1);
-		
+	}
+	
+	
+	@Override
+	public List<Movie> getAllMovies() {
 		return movieList.getMovies();
 	}
 
@@ -30,9 +25,8 @@ public class MovieDatabase implements IMovieDatabase {
 	}
 
 	@Override
-	public String insertMovie(String title, int year, String director,
-			String[] actor) {
-		// TODO Auto-generated method stub
+	public String insertMovie(Movie newMovie) {
+		movieList.addMovie(newMovie);
 		return null;
 	}
 
