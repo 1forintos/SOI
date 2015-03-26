@@ -4,11 +4,12 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement
 @XmlType
+@XmlRootElement
 public class Movie {
 	
 	@XmlElement
@@ -21,9 +22,13 @@ public class Movie {
 	private String director;
 	
 	@XmlElement
-	private String[] actor; // TODO maybe arraylist
+	private String[] actor;
 	
-	private String id;
+	@XmlTransient
+	private int id;
+	
+	@XmlTransient
+	private boolean hasId = false;
 	
 	public void setTitle(String newTitle) {
 		this.title = newTitle;
@@ -57,11 +62,16 @@ public class Movie {
 		return this.actor;
 	}
 	
-	public void setId(String newId) {
+	public void setId(int newId) {
+		this.hasId = true;
 		this.id = newId;
 	}
 	
-	public String getId() {
+	public int getId() {
 		return this.id;
+	}
+	
+	public boolean hasId() {
+		return this.hasId;
 	}
 }

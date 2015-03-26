@@ -1,6 +1,6 @@
 package moviedatabase;
 
-import java.util.List;
+import javax.ws.rs.core.Response;
 
 public class MovieDatabase implements IMovieDatabase {
 	
@@ -12,41 +12,52 @@ public class MovieDatabase implements IMovieDatabase {
 		}
 	}
 	
-	
 	@Override
-	public List<Movie> getAllMovies() {
-		return movieList.getMovies();
+	public MovieList getAllMovies() {
+		return movieList;
 	}
 
 	@Override
-	public Movie getMovieById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Response getMovieById(int id) {
+		Movie m = movieList.getMovieById(id);
+		if(m == null) {
+			return Response.status(Response.Status.NOT_FOUND).build();
+		} else {
+			return Response.ok(m).build();
+		}
 	}
 
 	@Override
-	public String insertMovie(Movie newMovie) {
-		movieList.addMovie(newMovie);
-		return null;
+	public Result insertMovie(Movie newMovie) {
+		return movieList.addMovie(newMovie);
 	}
 
 	@Override
-	public void updateOrInsertMovie(int id, String title, int year,
-			String director, String[] actor) {
-		// TODO Auto-generated method stub
+	public void updateOrInsertMovie(int id, Movie movie) {
+		movie.setId(id);
+		if(movieList.getMovieById(id) == null) {
+			movieList.addMovie(movie);
+		} else {
+			movieList.modifyMovie(movie);
+		}
+		
 		
 	}
 
 	@Override
-	public void deleteMovie(String id) {
-		// TODO Auto-generated method stub
-		
+	public void deleteMovie(int id) {
+		if(movieList.getMovieById(id) != null) {
+			movieList.removeMovieById(id);
+		}
 	}
 
 	@Override
-	public List<String> getMovieIdsByField(int year, String field) {
-		// TODO Auto-generated method stub
-		return null;
+	public Response getMovieIds(int year, String sortField) {
+		if(sortField.equals("Director") || sortField.equals("Title")) {
+			return Response.ok(movieList.getMovieIds(year, sortField)).build();
+		} else {
+			return Response.status(Response.Status.BAD_REQUEST).build();
+		}
 	}
 
 }
