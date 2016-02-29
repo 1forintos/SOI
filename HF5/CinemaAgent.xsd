@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="http://www.iit.bme.hu/soi/hw/CinemaAgent"
+		xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		xmlns:tns="http://www.iit.bme.hu/soi/hw/CinemaAgent"
+		xmlns:ns1="http://www.iit.bme.hu/soi/hw/CinemaAgent"
+		xmlns:ns0="http://www.iit.bme.hu/soi/hw/CinemaReservation"
+		elementFormDefault="qualified">
+	
+	<xs:import schemaLocation="CinemaReservation.xsd" namespace="http://www.iit.bme.hu/soi/hw/CinemaReservation"/>
+
+	
+	<xs:element name="Reserve" nillable="true" type="ns1:Reserve"/>
+	<xs:complexType name="Reserve">
+		<xs:sequence>
+			<xs:element name="seatCount" type="xs:int" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="ReserveResponse" nillable="true" type="ns1:ReserveResponse"/>
+	<xs:complexType name="ReserveResponse">
+		<xs:sequence>
+			<xs:element name="ReserveResult" nillable="true" type="ns0:Reservation" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

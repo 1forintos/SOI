@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="http://www.iit.bme.hu/soi/hw/CinemaReservation"
+		xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		xmlns:tns="http://www.iit.bme.hu/soi/hw/CinemaReservation"
+		xmlns:ns0="http://www.iit.bme.hu/soi/hw/CinemaReservation"
+		elementFormDefault="qualified">
+
+	<xs:element name="ArrayOfSeat" nillable="true" type="ns0:ArrayOfSeat"/>
+	<xs:complexType name="ArrayOfSeat">
+		<xs:sequence>
+			<xs:element name="Seat" nillable="true" type="ns0:Seat" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="Offer" nillable="true" type="ns0:Offer"/>
+	<xs:complexType name="Offer">
+		<xs:sequence>
+			<xs:element name="OfferId" type="xs:string" nillable="true"/>
+			<xs:element name="Price" type="xs:int" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="Seat" nillable="true" type="ns0:Seat"/>
+	<xs:complexType name="Seat">
+		<xs:sequence>
+			<xs:element name="Row" type="xs:string" nillable="true"/>
+			<xs:element name="Column" type="xs:string" nillable="true"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="Reservation" nillable="true" type="ns0:Reservation"/>
+	<xs:complexType name="Reservation">
+		<xs:sequence>
+			<xs:element name="ReservationId" type="xs:string" nillable="true"/>
+			<xs:element name="Date" type="xs:date" />
+			<xs:element name="Room" type="xs:string" nillable="true"/>
+			<xs:element name="Seats" nillable="true" type="ns0:ArrayOfSeat" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="GetOffer" nillable="true" type="ns0:GetOffer"/>
+	<xs:complexType name="GetOffer">
+		<xs:sequence>
+			<xs:element name="seatCount" type="xs:int" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="GetOfferResponse" nillable="true" type="ns0:GetOfferResponse"/>
+	<xs:complexType name="GetOfferResponse">
+		<xs:sequence>
+			<xs:element name="GetOfferResult" nillable="true" type="ns0:Offer" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="Reserve" nillable="true" type="ns0:Reserve"/>
+	<xs:complexType name="Reserve">
+		<xs:sequence>
+			<xs:element name="offerId" type="xs:string" nillable="true"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="ReserveResponse" nillable="true" type="ns0:ReserveResponse"/>
+	<xs:complexType name="ReserveResponse">
+		<xs:sequence>
+			<xs:element name="ReserveResult" nillable="true" type="ns0:Reservation" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
